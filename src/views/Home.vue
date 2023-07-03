@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onUpdated, ref } from 'vue'
 import { useTaskStore } from "../stores/task";
 import { useRouter } from 'vue-router';
 import Nav from '../components/Nav.vue';
@@ -30,7 +30,9 @@ const getTasks = async() => {
   tasks.value = await taskStore.fetchTasks();
 };
 
-getTasks();
+onUpdated(() => {
+  getTasks();
+});
 
 </script>
 
