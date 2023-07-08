@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onUpdated } from 'vue';
 import { useTaskStore } from '../stores/task';
 import { supabase } from '../supabase';
 
