@@ -1,16 +1,32 @@
 <template>
-<div class="container">
-    <h3>{{task.title}}</h3>
-    <button @click="deleteTask">Delete {{task.title}}</button>
-</div>
+
+    <div class="">
+      <h3 :class="{ taskComplete: task.is_complete }">{{ task.title }}</h3>
+      <h3 :class="{ taskComplete: task.is_complete }">{{ task.description }} </h3>
+  
+      <button @click="deleteTask">Delete</button>
+      <button @click="toggleTask">Complete</button>
+      <button @click="updateToggle">Edit</button>
+      <div v-if="updateInput">
+        <input type="text" v-model="title" />
+        <input type="text" v-model="description" />
+        <button @click="updateTask">Update</button>
+      </div>
+    </div>
+
 </template>
 
 <script setup>
-import { ref, onUpdated } from 'vue';
+import { ref, onUpdated, watch } from 'vue';
 import { useTaskStore } from '../stores/task';
 import { supabase } from '../supabase';
 
 const taskStore = useTaskStore();
+const title = ref("");
+const description = ref("");
+
+//
+const updateInput = ref(false)
 
 const props = defineProps({
     task: Object,
@@ -20,6 +36,23 @@ const props = defineProps({
 const deleteTask = async() => {
     await taskStore.deleteTask(props.task.id);
 };
+
+const updateToggle = () => {
+    updateInput.value = !updateInput.value;
+};
+
+const updateTask = () => {
+    taskStore.updateTask(props.task.id, title.value, description.value);
+    title.value = "";
+    description.value = "";
+    updateToggle();
+};
+
+const toggleTask = () => {
+    props.task.is_complete = !props.task.is_complete;
+    taskStore.completeTask(props.task.id, props.task.is_complete);
+}
+
 
 </script>
 
