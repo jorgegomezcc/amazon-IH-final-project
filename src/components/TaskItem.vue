@@ -56,7 +56,11 @@ const toggleTask = () => {
 
 </script>
 
-<style></style>
+<style>
+.taskComplete {
+  text-decoration: line-through;
+}
+</style>
 
 <!--
 **Hints**

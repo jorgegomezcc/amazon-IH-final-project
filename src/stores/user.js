@@ -35,7 +35,7 @@ export const useUserStore = defineStore("user", {
         this.user = user;
         // console.log(this.user);                              clg for see data
 
-        const { data: profile } = await supabase
+        const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .insert([
           {

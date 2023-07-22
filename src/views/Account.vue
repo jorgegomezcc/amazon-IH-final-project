@@ -6,7 +6,7 @@
     <button @click="uploadFile">Upload File</button>
       <!-- </form>
   <button v-if="!inputUpdateAvatar" @click="editToggleAvatar">Change Avatar</button> -->
-  
+
   <h1>Name: {{ username }}</h1>
   <h1>
     Website: <a target="_blank" :href="website">{{ website }}</a>
@@ -36,7 +36,7 @@ import Swal from 'sweetalert2';
   const bio = ref(null);
 
   const avatarFile = ref();
-  const avatarfileUrl = ref();
+  const avatarFileUrl = ref();
   const inputUpdateAvatar = ref(false);
 
   const editToggleAvatar = () => {
@@ -65,7 +65,7 @@ import Swal from 'sweetalert2';
 
     const deleteUrl =  data[0].avatar_url;
     const { error: urlDeleteError } = await supabase.storage
-    .from('profile-img')
+    .from('avatars')
     .remove([deleteUrl]);
 
     if (urlDeleteError) {
@@ -80,21 +80,29 @@ import Swal from 'sweetalert2';
     });
 
     const timestamp = Date.now();
-    const filePath = `profiles/${timestamp} -${avatarFile.value.name}`;
+    const filePath = `profiles/${timestamp}-${avatarFile.value.name}`;
       const { error: uploadError } = await supabase.storage
-      .from('profile-img')
+      .from('avatars')
       .upload(filePath, avatarFile.value);
     if (uploadError) {
       console.error(`Error uploading file: ${uploadError}`);
       return;
     }
 
-    avatarfileUrl.value = urlData.publicURL;
-    console.log(avatarfileUrl.value);
+    const { data: urlData, error: urlError } = await supabase.storage
+    .from("avatars")
+    .getPublicUrl(filePath);
+      console.log(urlData);
+      if (urlError) {
+        console.error("Error getting public URL:", urlError);
+        return;
+      }
+    avatarFileUrl.value = urlData.publicURL;
+    console.log(avatarFileUrl.value);
 
     const { error: updateError } = await supabase
     .from('profiles')
-    .update({ avatar_url: avatarfileUrl.value })
+    .update({ avatar_url: avatarFileUrl.value })
     .eq('user_id', supabase.auth.user().id);
 
     if (updateError) {
