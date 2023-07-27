@@ -1,97 +1,212 @@
 <template>
-
-    <div class="">
-      <h3 :class="{ taskComplete: task.is_complete }">{{ task.title }}</h3>
-      <h3 :class="{ taskComplete: task.is_complete }">{{ task.description }} </h3>
-  
-      <button @click="deleteTask">Delete</button>
-      <button @click="toggleTask">Complete</button>
-      <button @click="updateToggle">Edit</button>
-      <div v-if="updateInput">
-        <input type="text" v-model="title" />
-        <input type="text" v-model="description" />
-        <button @click="updateTask">Update</button>
+  <div class="container">
+  <div class="card-deck">
+    <div class="card bg-secondary mb-3">
+      <div class="card-header text-center" :class="{ completed: task.is_complete }">
+        <span class="title" :class="{ completed: task.is_complete }">{{task.title}}</span>
+      </div>
+      <div class="card-body text-center">
+        <h5 class="card-title" :class="{ completed: task.is_complete }">
+          {{ task.is_complete ? "Task completed" : "Task incompleted" }}
+        </h5>
+        <p class="card-text" :class="{ completed: task.is_complete }">
+          {{ task.description }}
+        </p>
+        <div class="icons">
+          <button
+          class="boton-complete"  
+          :class="{ completed: task.is_complete }"
+            @click="toggleComplete"
+          >
+            <i class="fa fa-check fa-2x"></i>
+            {{ task.is_complete ? "" : "" }}
+          </button>
+          <button @click="deleteTask" class="boton-delete">
+            <i class="fa fa-trash-o fa-2x"></i>
+          </button>
+          <button @click="UpdateToggle" class="boton-update">
+            <i class="fa fa-pencil fa-2x"></i>
+          </button>
+        </div>
+        <div>
+          <form
+            v-if="inputUpdate && task.id === selectedTaskId"
+            class="update-form text-center"
+          >
+            <input
+              type="text"
+              v-model="name"
+              class="input1"
+              placeholder="New Title"
+            />
+            <textarea
+              type="text"
+              v-model="description"
+              class="input2"
+              placeholder="New Description"
+            >
+            </textarea>
+            <button @click="updateTask" class="boton-save">Update task</button>
+            <p v-if="error" class="error-message">{{ error }}</p>
+          </form>
+        </div>
       </div>
     </div>
-
+  </div>
+  </div>
 </template>
 
+<!-- ===================== COMIENZA EL SCRIPT ================================= -->
+
 <script setup>
-import { ref, onUpdated, watch } from 'vue';
-import { useTaskStore } from '../stores/task';
-import { supabase } from '../supabase';
+import { ref, defineProps } from "vue";
+import { useTaskStore } from "../stores/task";
+import { supabase } from "../supabase";
 
 const taskStore = useTaskStore();
-const title = ref("");
+const name = ref("");
 const description = ref("");
-
-//
-const updateInput = ref(false)
-
 const props = defineProps({
-    task: Object,
+  task: Object,
 });
+const selectedTaskId = ref(null);
+const tasks = ref([]);
 
-// Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
-const deleteTask = async() => {
-    await taskStore.deleteTask(props.task.id);
+const deleteTask = async () => {
+  await taskStore.deleteTask(props.task.id);
 };
 
-const updateToggle = () => {
-    updateInput.value = !updateInput.value;
+// Esta línea de código crea una referencia reactiva llamada inputUpdate con un valor inicial de false. Esta referencia se puede utilizar para realizar un seguimiento del estado de actualización de un input en una aplicación y activar o desactivar ciertas funcionalidades o comportamientos según el valor de inputUpdate.
+const inputUpdate = ref(false);
+
+// Esta función UpdateToggle se utiliza para cambiar el valor de la referencia reactiva inputUpdate y asignar el ID de la tarea a la referencia reactiva selectedTaskId.
+const UpdateToggle = () => {
+  inputUpdate.value = !inputUpdate.value;
+  selectedTaskId.value = props.task.id;
 };
 
+// Esta función updateTask se utiliza para actualizar una tarea en taskStore con los nuevos valores del nombre y la descripción. Luego, se restablecen los valores del nombre y la descripción a cadenas vacías, y se llama a UpdateToggle para realizar alguna acción adicional relacionada con la actualización de la tarea.
 const updateTask = () => {
-    taskStore.updateTask(props.task.id, title.value, description.value);
-    title.value = "";
-    description.value = "";
-    updateToggle();
+  taskStore.updateTask(props.task.id, name.value, description.value);
+  name.value = "";
+  description.value = "";
+  UpdateToggle();
 };
 
-const toggleTask = () => {
-    props.task.is_complete = !props.task.is_complete;
-    taskStore.completeTask(props.task.id, props.task.is_complete);
-}
-
-
+// Esta función toggleComplete se utiliza para alternar el estado de completitud de una tarea entre completa e incompleta. Actualiza el valor de la propiedad is_complete de la tarea en props y luego llama a taskStore.completeTask() para reflejar ese cambio en taskStore.
+const toggleComplete = () => {
+  props.task.is_complete = !props.task.is_complete;
+  taskStore.completeTask(props.task.id, props.task.is_complete);
+};
 </script>
 
-<style>
-.taskComplete {
+
+<!-- ================= STYLES TASKITEM ======================================= -->
+
+
+  <style scoped>
+.card-header.completed {
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+  background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210824/pngtree-yellow-green-background-stock-images-wallpaper-image_769660.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.card-header {
+  background-color: #33343d;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+  background-position: center;
+}
+
+/* .imagen-titulo-card {
+  margin-right: 0.5rem;
+  height: 40px;
+  width: 40px;
+  transition: transform 0.3s;
+}
+
+.imagen-titulo-card:hover {
+  transform: scale(1.2);
+} */
+
+.card-text.completed {
   text-decoration: line-through;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.boton-complete.completed {
+  background-color: #1c881c;
+}
+
+.input1 {
+  height: 30px;
+  width: 250px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+.input2 {
+  width: 250px;
+  margin-bottom: 15px;
+}
+
+.update-form {
+  margin-top: 30px;
+}
+
+.boton-save {
+  background-color: #a504b7;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.boton-save:hover {
+  background-color: #cb53d8;
+}
+.card {
+  position: relative;
+  /* justify-content: space-around; */
+  width: 300px;
+  background-color: #c4c3ca;
+}
+.icons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.boton-complete {
+  text-decoration: underline;
+  height: 50px;
+  width: 50px;
+  background-color: #afafaf;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.boton-update {
+  height: 50px;
+  width: 50px;
+
+  background-color: #102770;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.boton-delete {
+  height: 50px;
+  width: 50px;
+  background-color: #ff0000d1;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
 </style>
-
-<!--
-**Hints**
-1. ref() or reactive() can be used here to store the following, think if you want to store them either individually or
-like an object, up to you.
-
-2. Data properties need here are the following: a boolean to store a false**Important variable, a string to store an error,
-a string to store the value of the task that the user can edit, an initial false boolean to hide the inputFIeld used to edit
-the new task detail or details[this is in reference of the task title and the task description].
-
-3. Store the custom emit events that will be used to call the functions of the homeView for editing, deleting and toggling the
-status[completed, not complted] of the taskItem.
-
-4. Function to handle the error with the data properties used to control the error and the the boolean controlling the boolean
-empty variable.
-
-5. Function to handle the edit dialogue where the inputField is displayed and the string used to store the value of the
-inputField will be used here to save the value as a prop on this function.
-
-6. Function to emmit a custom event emit() that takes 2 parameters a name for the custom event and the value that will be
-send via the prop to the parent component. This function can control the toggle completion of the task on the homeview.
-
-7. Function to edit the task information that you decided that the user can edit. This function's body takes in a conditional
-that first checks if the value of the task [either title and description or just title] is empty which if true it runs the
-function used to handle the error on hint4. Else, the conditional sets the first mentioned boolean data property on hint2
-back to its inital boolean value to hide the error message and repeat the same for the data property mentioned 4th on hint2;
-a constant that stores an object that holds the oldValue from the prop item and the value of the task coming from the data
-property mentioned 3rd on hint2; a custom event emit() that takes 2 parameters a name for the custom event and the value
-from the object used on this part of the conditional and lastly this part of the conditional sets the value of input field
-to an empty string to clear it from the ui.
-
-8. Function to emmit a custom event emit() that takes 2 parameters a name for the custom event and the value that will be
-send via the prop to the parent component. This function can control the removal of  the task on the homeview.
--->
+  
