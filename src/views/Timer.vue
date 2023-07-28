@@ -157,7 +157,7 @@ setInterval(timer, 1000);
   justify-content: space-between;
   margin-left: 1rem;
   margin-right: 1rem;
-  margin-top: 3rem;
+  margin-top: 3.5rem;
 }
 
 #clock-date p {
@@ -236,6 +236,7 @@ setInterval(timer, 1000);
   margin-left: 1rem;
   margin-right: 1rem;
   margin-top: 0rem;
+  margin-bottom: 0rem;
  }
 
 }

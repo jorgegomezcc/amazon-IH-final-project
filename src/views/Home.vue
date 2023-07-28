@@ -7,6 +7,7 @@
       <p>{{ currentTime }}</p>
       <p>{{ currentDay }}</p>
       </div>
+      <h3 class="text-center ">Focus on! Task App!</h3>
     </div>
     <NewTask />
     <h1 class="m-4 text-center">Tasks:</h1>
@@ -92,6 +93,11 @@ onMounted(async () => {
 #clock-date p {
   color: #c4c3ca;
   font-size: 2rem;
+}
+
+h3 {
+  font-weight: 600;
+  color:#c4c3ca;
 }
 
 @media (max-width: 990px) {

@@ -2,30 +2,35 @@
  
   <section id="nav-section" >
 
-              <div id="nav-logo">
-                <router-link to="/">
-          <img
-            class="navbar-img animate__animated animate__bounceIn"
-            src="../assets/img/logoapp.png"
-            alt="Logo"
-          />
-        </router-link>
-              </div>
-              <input id="menu-toggle" type="checkbox" />
-              <label class='menu-button-container' for="menu-toggle">
-              <div class='menu-button'></div>
-            </label>
-              <div id="nav-links" class="menu">
-                      <li><a><router-link to="/timer">Timer</router-link></a></li>
-                      <li><a><router-link to="/">Task Manager</router-link></a></li>
-                      <li><a><router-link to="/account">Profile</router-link></a></li>
-                      <li><a @click="signOut">SignOut</a></li>
-              </div>
-              <div id="contact-btn">
-                <button @click="signOut" class="button">
-                <span class="button-bold">Log Out</span>
-              </button>
-              </div>
+    <div id="nav-logo">
+
+      <router-link to="/">
+      <img
+      class="navbar-img animate__animated animate__bounceIn"
+      src="../assets/img/logoapp.png"
+      alt="Logo"/>
+
+      </router-link>
+
+    </div>
+
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+
+    <div id="nav-links" class="menu">
+            <li><a><router-link to="/timer">Timer</router-link></a></li>
+            <li><a><router-link to="/">Task Manager</router-link></a></li>
+            <li><a><router-link to="/account">Profile</router-link></a></li>
+            <li><a @click="signOut">SignOut</a></li>
+    </div>
+    
+    <div id="contact-btn">
+      <button @click="signOut" class="button">
+      <span class="button-bold">Log Out</span>
+      </button>
+    </div>
 
   </section>
 
@@ -64,7 +69,7 @@ const signOut = async () => {
 
 </script>
 
-<style>
+<style scoped>
 
 /* ------------------------------ Navbar ------------------------------ */
 
