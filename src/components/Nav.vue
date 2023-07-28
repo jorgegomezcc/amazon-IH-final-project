@@ -1,13 +1,12 @@
 <template>
  
   <section id="nav-section" >
-      <header id="nav-bar">
-          <nav >
+
               <div id="nav-logo">
                 <router-link to="/">
           <img
             class="navbar-img animate__animated animate__bounceIn"
-            src="../assets/img/logo-small.png"
+            src="../assets/img/logoapp.png"
             alt="Logo"
           />
         </router-link>
@@ -27,8 +26,7 @@
                 <span class="button-bold">Log Out</span>
               </button>
               </div>
-          </nav>
-      </header>
+
   </section>
 
 </template>
@@ -81,10 +79,15 @@ const signOut = async () => {
   z-index: 9999;
   padding: 0.3rem;
   margin-top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 nav {
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -108,6 +111,10 @@ nav {
   display: none;
 }
 
+.navbar-img {
+height: 50px;
+
+}
 
 .button {
   padding: 10px;
@@ -205,8 +212,9 @@ nav {
 
 #nav-section {
   width: 100%;
+  height: 80px;
   background-image: none;
-  position: relative;
+  position:unset;
   padding: 0rem;
   margin: auto;
   background-color: #33343d;

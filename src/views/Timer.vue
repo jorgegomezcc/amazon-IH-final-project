@@ -62,11 +62,11 @@ import alertSound from "../assets/sounds/alert.mp3";
 import { ref } from "vue";
 import moment from "moment";
 
-//const donde podemos guardar el tiempo
+//const to save the time sets
 const currentTime = ref("");
 const currentDay = ref("");
 
-//funcion para actualizar el tiempo
+//Function to update the time
 const updateCurrentTime = () => {
   currentTime.value = moment().format("k:mm:ss");
 };
@@ -75,13 +75,14 @@ const updateCurrentDay = () => {
   currentDay.value = moment().format("ddd, D MMM");
 };
 
-//lamamos funcion cada segundo para actulizar el timepo
+//Call the function for update the tima
 setInterval(updateCurrentTime, 1000);
 
+//call the day function
 updateCurrentDay();
 
 
-//varibales para gestionar sonidos
+//const var to save the sounds
 const btnSong = new Audio(buttonSong);
 const alert = new Audio(alertSound);
 const played = ref(false);
@@ -89,7 +90,7 @@ const played = ref(false);
 const minutes = ref(24);
 const seconds = ref(59);
 
-//paramos el contador cambiando el estado de la variable played
+//we stop the counter by changing the state of the played variable
 const stopTimer = () => {
   played.value = false;
   alert.play();
@@ -97,7 +98,7 @@ const stopTimer = () => {
   clearInterval(timer);
 };
 
-//timer que indica la cantidad de minutos y segundos correpsondientes a cada uno de los estados
+//timer which indicates the number of minutes and seconds corresponding to each of the states
 const setTimer = (type) => {
   if (type === "pomodoro") {
     minutes.value = 24;
@@ -114,7 +115,7 @@ const setTimer = (type) => {
   }
 };
 
-//actualizamos el contador por medio de la funcion setInterval cada segundo actualizando los valores de minutos y segundos
+//we update the counter by means of the function setInterval every second updating the minute and second values.
 const timer = () => {
   if (!(seconds.value === 0 && minutes.value === 0) && played.value) {
     played.value = true;

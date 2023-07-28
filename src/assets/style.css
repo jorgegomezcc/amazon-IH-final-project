@@ -2,35 +2,5 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    max-width: 100vw;
   }
-/* :root {
-	font-family: 'Poppins', sans-serif;
-	font-weight: 300;
-	font-size: 15px;
-	line-height: 1.7;
-	color: #c4c3ca;
-	background-color: #1f2029;
-	overflow-x: hidden;
-} */
-/* :root {
-    --colorWhite: #ffffff;
-    --colorBlack: #000000;
-    --colorRed: red;
-    --fontSize-sm: 16px;
-    --fontFamily: 'Arial, Helvetica, sans-serif';
-    --fontTitle: 'Arial';
-    --fontBody: 'Helvetica';
-} */
-
-/* SignIn Component */
-
-/* h1 {
-    color: var(--colorRed);
-} */
-
-/* SignUp Component */
-
-/* Home view */
-
-/* Account View */

@@ -31,7 +31,7 @@ import { useTaskStore } from "../stores/task"
 
 const taskStore = useTaskStore();
 
-// variables para los valors de los inputs
+// const var to save inputs values
 const name = ref('');
 const description = ref('');
 
@@ -44,7 +44,7 @@ const errorMessage = ref(null);
 // Arrow function para crear tareas.
 const addTask = () => {
 if(name.value.length === 0 || description.value.length === 0){
-    // Primero comprobamos que ningún campo del input esté vacío y lanzamos el error con un timeout para informar al user.
+    // We first check that no input field is empty and throw the error with a timeout to inform the user.
 
     showErrorMessage.value = true;
     errorMessage.value = 'The task title or description is empty';
@@ -53,7 +53,7 @@ if(name.value.length === 0 || description.value.length === 0){
     }, 5000);
 
 } else {
-    // Aquí mandamos los valores a la store para crear la nueva Task. Esta parte de la función tenéis que refactorizarla para que funcione con emit y el addTask del store se llame desde Home.vue.
+// Here we send the values to the store to create the new Task. This part of the function needs to be refactored so that it works with emit and the store's addTask is called from Home.vue.
 
     taskStore.addTask(name.value, description.value);
     name.value = '';

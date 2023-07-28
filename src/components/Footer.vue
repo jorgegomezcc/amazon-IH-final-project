@@ -3,7 +3,7 @@
       <div class="footer-section">
         <div class="footer-logo">
           <img
-            src=""
+            src="../assets/img/logoapp.png"
             width="40"
             height="40"
             alt="Logo ToDo App"

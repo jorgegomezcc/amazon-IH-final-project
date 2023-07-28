@@ -1,88 +1,90 @@
 <template>
 
-  <div class="page-content page-container" id="page-content">
-
-    <Nav />
-    <div class="padding">
-
-      <div class="row container d-flex justify-content-center">
-
-        <div class="col-xl-6 col-md-12">
-
-          <div class="card user-card-full" id="card-block-container">
-
-            <div class="row m-l-0 m-r-0" >
-
-              <div class="col-md-4 user-profile">
-
-                <div class="card-block text-center text-white">
-
-                  <div class="m-b-25">
-                    <img :src="avatar_url" v-if="avatar_url" class="img-radius" alt="User-Profile-Image" >
-                    <button class="btn btn-primary m-2" @click="editToggleAvatar">Edit Avatar</button>
+<Nav />
+  
+    <div class="page-content page-container wrapper" id="page-content">
+  
+      <div class="padding">
+  
+        <div class="m-0 vh-100 row d-flex justify-content-center">
+  
+          <div class="col-xl-6 col-md-12">
+  
+            <div class="card user-card-full">
+  
+              <div class="row m-l-0 m-r-0">
+  
+                <div class="col-sm-4 bg-c-lite-green user-profile">
+  
+                  <div class="card-block text-center text-white">
+  
+                    <div class="m-b-25">
+                      <img :src="avatar_url" v-if="avatar_url" class="img-radius" alt="User-Profile-Image">
+                    </div>
+  
+                      <h6 class="username">{{ username }}</h6>
+                      <button class="button btn-primary m-2" @click="editToggleAvatar">Edit Avatar</button>
                       <div v-if="inputUpdateAvatar">
                         <input  @change="fileManager" type="file" />
-                        <button class="btn btn-primary btn-block mb-4" @click="uploadFile">Upload File</button>
+                        <button class="button btn-primary btn-block mb-4" @click="uploadFile">Upload File</button>
                       </div>
+                      
+  
                   </div>
-
-                    <h6 class="f-w-600">{{ username }}</h6>
-                    
-
+  
                 </div>
-
-              </div>
-
-              <div class="col-sm-8">
-
-                <div class="card-block">
-                  
-                  <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
-
-                  <div class="row">
-
-                      <div class="col-sm-6">
-                        <p class="m-b-10 f-w-600">Full Name</p>
-                        <h6 class="text-muted f-w-400">{{ username }}</h6>
-                      </div>
-
-                      <div class="col-sm-6">
-                        <p class="m-b-10 f-w-600">Location</p>
-                        <h6 class="text-muted f-w-400">{{ location }}</h6>
-                      </div>
-
-                      <div class="col-sm-6">
-                        <p class="m-b-10 f-w-600">Bio</p>
-                       <h6 class="text-muted f-w-400">{{ bio}}</h6>
-                     </div>
-
-                     <div class="col-sm-6">
-                       <p class="m-b-10 f-w-600">Website</p>
-                       <h6 class="text-muted f-w-400"><a target="_blank" :href="website">{{ website }}</a></h6>
-                     </div>
-
-                     <Profile @updateProfileEmit="hundleUpdateProfile" />
-
+  
+                <div class="col-sm-8">
+  
+                  <div class="card-block">
+                    
+                    <h6 class="m-b-20 p-b-5 cardTitle text-center">Information</h6>
+                    <hr>
+                    <div class="row">
+  
+                        <div class="col-sm-6">
+                          <p class="m-b-10 titleData">Full Name</p>
+                          <h6 class="textData">{{ username }}</h6>
+                        </div>
+  
+                        <div class="col-sm-6">
+                          <p class="m-b-10 titleData">Location</p>
+                          <h6 class="textData">{{ location }}</h6>
+                        </div>
+  
+                        <div class="col-sm-6">
+                          <p class="m-b-10 titleData">Bio</p>
+                         <h6 class="textData">{{ bio}}</h6>
+                       </div>
+  
+                       <div class="col-sm-6">
+                         <p class="m-b-10 titleData">Website</p>
+                         <h6 class="textData"><a target="_blank" :href="website">{{ website }}</a></h6>
+                       </div>
+                       <br>
+                       <hr>
+                       <Profile @updateProfileEmit="hundleUpdateProfile" />
+  
+                    </div>
+                      
                   </div>
-                    
+  
                 </div>
-
+  
               </div>
-
+  
             </div>
-
+  
           </div>
-
+  
         </div>
-
+  
       </div>
-
+  
     </div>
-
-  </div>
-
-
-</template>
+  
+  
+  </template>
 
 <script setup>
 import { supabase } from "../supabase";
@@ -118,7 +120,6 @@ const hundleUpdateProfile = (updatedProfileData) => {
   website.value = updatedProfileData.website;
   location.value = updatedProfileData.location;
   bio.value = updatedProfileData.bio;
-  avatar_url.value = updatedProfileData.avatar_url;
 };
 
 const uploadFile = async () => {
@@ -211,20 +212,19 @@ onMounted(() => {
 
 <style scoped>
 
- .page-content{
+.wrapper{
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
 	font-size: 15px;
 	line-height: 1.7;
-	color: #c4c3ca;
 	background-color: #1f2029;
   min-height: 100vh;
-  min-width: 100vw;
   padding-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-}
+  overflow-x: hidden;
+
+} 
+
+/* ----------------------------------------------- */
 
 .padding {
     padding: 3rem !important
@@ -242,6 +242,26 @@ onMounted(() => {
     margin-bottom: 30px;
 }
 
+.cardTitle {
+  font-size: 1.7rem;
+
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: 900;
+  padding: 0.5rem;
+}
+
+.textData {
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.titleData {
+  font-weight: 700;
+}
+
 .m-r-0 {
     margin-right: 0px;
 }
@@ -251,18 +271,15 @@ onMounted(() => {
 }
 
 .user-card-full .user-profile {
+    border-radius: 5px 0 0 5px;
+}
+
+.bg-c-lite-green {
   background-color: #33343d;
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
-  background-position: bottom center;
-  background-repeat: no-repeat;
-  background-size: 300%;
-  border-radius: 6px;
+  background-position: center;
+  background-size: cover;
 }
-
-#card-block-container{
-  border-radius: 6px;
-}
-
 
 .user-profile {
     padding: 20px 0;
@@ -277,13 +294,11 @@ onMounted(() => {
 }
 
 .img-radius {
-    height: 170px;
-    width: 170px;
-    border-radius: 100%;
+    height: 80%;
+    width: 80%;
+    border-radius: 5px;
 }
 
-
- 
 h6 {
     font-size: 14px;
 }
@@ -292,19 +307,32 @@ h6 {
     line-height: 25px;
 }
 
-
-
-
-
+.button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  font-weight: 700;
+  background-color: #ffeba7;
+  color: #102770;
+  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+.button:active,
+.button:focus{  
+  background-color: #102770;
+  font-weight: 700;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+.button:hover{  
+  background-color: #102770;
+  font-weight: 700;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  transition: all 0.2s ease;
+}
 
 /* ---------------------------------------------- */
-@media (max-width: 990px) {
-
-.page-content{
-  padding: 0;
-  margin: 0;
-}
-
-}
 
 </style>

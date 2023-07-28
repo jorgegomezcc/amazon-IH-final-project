@@ -24,7 +24,7 @@
                     <img :src="avatar_url" v-if="avatar_url" class="img-radius" alt="User-Profile-Image">
                   </div>
 
-                    <h6 class="f-w-600">{{ username }}</h6>
+                    <h6 class="username">{{ username }}</h6>
                     <i @change="fileManager" type="file" class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                     <button class="btn btn-primary btn-block mb-4" @click="uploadFile">Upload File</button>
                     
@@ -58,8 +58,10 @@
 
                      <div class="col-sm-6">
                        <p class="m-b-10 f-w-600">Website</p>
-                       <h6 class="text-muted f-w-400">{{ website }}</h6>
-                      </div>
+                       <h6 class="text-muted f-w-400"><a target="_blank" :href="website">{{ website }}</h6>
+                     </div>
+
+                     <Profile @updateProfileEmit="hundleUpdateProfile" />
 
                   </div>
                     
@@ -95,6 +97,10 @@ body {
 
 .user-card-full {
     overflow: hidden;
+}
+
+.username {
+  font-size: 2rem;
 }
 
 .card {
@@ -225,3 +231,14 @@ p {
 
 
 </style>
+
+
+
+<!-- <div class="col-md-4">
+  <img :src="avatar_url" v-if="avatar_url" class="img-radius" alt="User-Profile-Image" >
+  <button class="btn btn-primary m-2" @click="editToggleAvatar">Edit Avatar</button>
+    <div v-if="inputUpdateAvatar">
+      <input  @change="fileManager" type="file" />
+      <button class="btn btn-primary btn-block mb-4" @click="uploadFile">Upload File</button>
+    </div>
+</div> -->

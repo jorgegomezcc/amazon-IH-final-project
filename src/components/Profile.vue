@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <button class="btn btn-primary btn-block mb-4" @click="editToggleProfile">Edit Profile</button>
+      <button class="button btn-primary btn-block mb-4" @click="editToggleProfile">Edit Profile</button>
       <form v-if="inputUpdate">
         <label for="name" class="form-label">Full name</label>
         <input class="form-control" v-model="profile.full_name" placeholder="Full name" type="text" id="name"/>
@@ -11,7 +11,7 @@
         <input class="form-control" v-model="profile.website" placeholder="Website" type="text" id="web"/>
         <label for="location" class="form-label">Location</label>
         <input class="form-control" v-model="profile.location" placeholder="Location" type="text" id="location" />
-        <button class="btn btn-primary mt-3" type="button" @click="updateProfile">Save Changes</button>
+        <button class="button btn-primary mt-3" type="button" @click="updateProfile">Save Changes</button>
       </form>
     </div>
   </div>
@@ -72,4 +72,32 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+
+.button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  font-weight: 700;
+  background-color: #ffeba7;
+  color: #102770;
+  box-shadow: 0 8px 24px 0 rgba(255,235,167,.2);
+}
+.button:active,
+.button:focus{  
+  background-color: #102770;
+  font-weight: 700;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+.button:hover{  
+  background-color: #102770;
+  font-weight: 700;
+  color: #ffeba7;
+  box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+  transition: all 0.2s ease;
+}
+
+</style>

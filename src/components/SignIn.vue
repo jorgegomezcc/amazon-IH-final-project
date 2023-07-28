@@ -6,7 +6,13 @@
 		<div class="container">
 			<div class="row full-height justify-content-center">
 				<div class="col-12 text-center align-self-center py-5">
-          <h1>Todo app</h1>
+          <h4>Focus on! Task App!</h4>
+          <img
+            class="mx-auto d-block"
+            height="200"
+            src="../assets/img/logoapp.png"
+            alt="Logo"
+          />
 					<div class="section pb-5 pt-5 pt-sm-2 text-center">
 						<h6 class="mb-0 pb-3">
                             <span>Log In</span>
@@ -43,7 +49,6 @@
                           <i class="input-icon uil uil-lock-alt"></i>
                         </div>
                           <button class="btn mt-4" type="submit">Sign In</button>
-                                        <!-- <p class="mb-0 mt-4 text-center" id="signup-route" >Dont have an account? class="link"<PersonalRouter :route="route" :buttonText="buttonText"/></p> -->
                         </div>
                       </div>
                     </form>
@@ -84,7 +89,6 @@
                           <i class="input-icon uil uil-lock-alt"></i>
                         </div>
                           <button class="btn mt-4" type="submit">Sign Up</button>
-                          <!-- <p class="mb-0 mt-4 text-center" id="signup-route" >Already have an account? class="link"<PersonalRouter :route="route" :buttonText="buttonText"/></p> -->
                         </div>
                         </div>
                       </form>
@@ -181,6 +185,11 @@ const signIn = async () => {
 	background-color: #1f2029;
 	overflow-x: hidden;
 }
+
+.logo{
+  height: 200px;
+}
+
 a {
 	cursor: pointer;
   transition: all 200ms linear;
