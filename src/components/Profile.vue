@@ -21,7 +21,7 @@
 import { ref, reactive, onMounted, computed } from "vue";
 import { useUserStore } from "../stores/user";
 import { supabase } from "../supabase";
-
+import Footer from '../components/Footer.vue'
 const userStore = useUserStore();
 
 const emit = defineEmits(["updateProfileEmit"])

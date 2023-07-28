@@ -80,7 +80,8 @@
         </div>
   
       </div>
-  
+      <Footer />
+
     </div>
   
   
@@ -93,6 +94,7 @@ import { useUserStore } from "../stores/user";
 import Nav from "../components/Nav.vue";
 import Profile from "../components/Profile.vue";
 import Swal from 'sweetalert2';
+import Footer from '../components/Footer.vue'
 
 const userStore = useUserStore();
 const username = ref(null);

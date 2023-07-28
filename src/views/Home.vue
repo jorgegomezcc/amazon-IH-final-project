@@ -14,7 +14,7 @@
     <div class="grid-container">
     <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
     </div>
-
+    <Footer />
   </div>
 </template>
 
@@ -26,6 +26,7 @@ import NewTask from '../components/NewTask.vue';
 import TaskItem from '../components/TaskItem.vue';
 import { format } from 'date-fns';
 import moment from "moment";
+import Footer from '../components/Footer.vue'
 
 const taskStore = useTaskStore();
 

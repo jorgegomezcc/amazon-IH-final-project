@@ -1,17 +1,16 @@
 <template>
     <footer>
       <div class="footer-section">
-        <div class="footer-logo">
+
+        <div class="footer-content">
           <img
             src="../assets/img/logoapp.png"
             width="40"
-            height="40"
-            alt="Logo ToDo App"
-          />
-        </div>
-        <div class="footer-separador"></div>
-        <div class="footer-text">
-          <p>Jorge gomez {{ year }}</p>
+            height="35"
+            alt="Logo ToDo App"/>
+
+          <p>Jorge Gomez {{ year }}</p>
+
         </div>
       </div>
     </footer>
@@ -20,29 +19,31 @@
   <script setup>
   import moment from "moment";
   
-  //guardamos el año actual en format YYYY en una variable
+  //save the date data
   const year = moment().format("YYYY");
   </script>
   
   <style scoped>
+
   .footer-section {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .footer-separador {
-    border-top: 1px solid rgb(48, 49, 52, 0.1);
-    height: 2px;
-  }
-  
-  .footer-text {
-    color: #303134;
     display: flex;
-    flex-direction: row;
     justify-content: center;
+    background-color: #33343d;
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+    background-position: bottom center;
+
   }
-  
-  .footer-text p {
-    margin-left: 10px;
-  }
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+p {
+    padding-left: 1rem;
+    color: #c4c3ca;
+    text-align: center;
+}
+
   </style>
