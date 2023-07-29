@@ -137,19 +137,19 @@ const uploadFile = async () => {
   const deleteUrl = data[0].avatar_url;
   // console.log(deleteUrl);
   const { error: urlDeleteError } = await supabase.storage
-    .from("profile-img")
+    .from("avatars")
     .remove([deleteUrl]);
 
   if (urlDeleteError) {
     console.error("Error deleting file:", urlDeleteError);
     return;
   }
-  console.log("File succesfully upload.");
+  console.log("File succesfully upload.");  
 
   const timestamp = Date.now();
   const filePath = `profiles/${timestamp}-${file.value.name}`;
   const { error: uploadError } = await supabase.storage
-    .from("profile-img")
+    .from("avatars")
     .upload(filePath, file.value);
   if (uploadError) {
     console.error("Error uploading file:", uploadError);
@@ -158,7 +158,7 @@ const uploadFile = async () => {
   console.log("File succesfully upload.");
 
   const { data: urlData, error: urlError } = await supabase.storage
-    .from("profile-img")
+    .from("avatars")
     .getPublicUrl(filePath);
   console.log(urlData);
   if (urlError) {
