@@ -19,14 +19,14 @@
           :class="{ completed: task.is_complete }"
             @click="toggleComplete"
           >
-            <i class="fas fa-check fa-2x"></i>
+            <i class="fa fa-check fa-2x"></i>
             {{ task.is_complete ? "" : "" }}
           </button>
           <button @click="UpdateToggle" class="updateBtn">
-            <i class="fas fa-pencil fa-2x"></i>
+            <i class="fa fa-pencil fa-2x"></i>
           </button>
           <button @click="deleteTask" class="deleteBtn">
-            <i class="fas fa-trash-o fa-2x"></i>
+            <i class="fa fa-trash-o fa-2x"></i>
           </button>
         </div>
         <div>
