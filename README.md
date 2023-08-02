@@ -29,7 +29,6 @@ https://www.canva.com/design/DAFp_yz4Nqw/h7BOZb_GuPCUe-0zBNs4AQ/view?utm_content
 
 ## Screenshots
 
-![App Screenshot]
 <img src="./src/assets/img/alldevices.png" alt="All Devices" width="70%" height="70%">
 <img src="./src/assets/img/laptop.png" alt="Laptop" width="70%" height="70%">
 <img src="./src/assets/img/mobile.png" alt="Mobile" width="70%" height="70%">
